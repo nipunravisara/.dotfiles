@@ -10,6 +10,10 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Util.SpawnOnce
+import XMonad.Layout.LayoutBuilder
+import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
+import XMonad.Layout.Renamed (renamed, Rename(CutWordsLeft, Replace))
+import XMonad.Layout.ThreeColumns
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -93,15 +97,16 @@ myWorkspaces = ["1","2","3","4","5"] -- workspace names
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ [
 
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf) -- launch a terminal
-
-    --, ((0,  xK_F11), spawn $ scripts ++ "bright.sh - 5") -- backlight keys
-    --, ((0,  xK_F12), spawn $ scripts ++ "bright.sh + 5")
     
+    , ((0, xF86XK_MonBrightnessDown), spawn "") -- backlight keys
+    , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 25")
+
     , ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle") -- volume keys
     , ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     , ((0, xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
 
-    , ((modm, xK_p), spawn "dmenu_run") -- launch dmenu
+    --, ((modm, xK_p), spawn "dmenu_run") -- launch dmenu
+    ,((modm, xK_p), spawn "rofi -show run") -- launch rofi
 
     , ((modm .|. shiftMask, xK_p), spawn "gmrun") -- launch gmrun
 
@@ -175,7 +180,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --------- LAYOUTS
 ------------------------------------------------------------------------------
 
-myLayout = spacing 8 $ tiled ||| Mirror tiled ||| noBorders Full
+myLayout = spacing 8 $ tiled ||| Mirror tiled ||| threeCol ||| noBorders Full
   where
      
      tiled   = Tall nmaster delta ratio -- default tiling algorithm partitions the screen into two panes
@@ -186,6 +191,7 @@ myLayout = spacing 8 $ tiled ||| Mirror tiled ||| noBorders Full
 
      delta   = 3/100 -- Percent of screen to increment by when resizing panes
 
+     threeCol   = renamed [Replace "threeCol"] $ limitWindows 3  $ ThreeCol 1 (3/100) (1/2)
 
 ------------------------------------------------------------------------------
 --------- WINDOW RULES
