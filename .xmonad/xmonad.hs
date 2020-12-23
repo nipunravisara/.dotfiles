@@ -50,16 +50,16 @@ myUrgentWSColor :: String
 myUrgentWSColor = "#cc0000" -- color of workspace with 'urgent' window
 
 myCurrentWSLeft :: String
-myCurrentWSLeft = "   " -- active workspace suffix
+myCurrentWSLeft = "    " -- active workspace suffix
 
 myCurrentWSRight :: String
-myCurrentWSRight = "   " -- active workspace preffix
+myCurrentWSRight = "    " -- active workspace preffix
 
 myVisibleWSLeft :: String
-myVisibleWSLeft = "(" -- inactive workspace suffix
+myVisibleWSLeft = "|" -- inactive workspace suffix
 
 myVisibleWSRight :: String
-myVisibleWSRight = ")" -- inactive workspace preffix
+myVisibleWSRight = "|" -- inactive workspace preffix
 
 myUrgentWSLeft :: String
 myUrgentWSLeft = "{" -- urgent workspace suffix
@@ -87,7 +87,7 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 --myWorkspaces    = ["\61705","\61563","\61441","\61684","\61635"]
 myWorkspaces :: [String]
-myWorkspaces = ["1","2","3","4","5"] -- workspace names
+myWorkspaces = ["   CODE","WEB","MUSIC","DOC","FILE"] -- workspace names
 
 
 ------------------------------------------------------------------------------
@@ -96,21 +96,22 @@ myWorkspaces = ["1","2","3","4","5"] -- workspace names
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ [
 
-      ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf) -- launch a terminal
-    
-    , ((0, xF86XK_MonBrightnessDown), spawn "") -- backlight keys
+      ((0, xF86XK_MonBrightnessDown), spawn "") -- backlight keys
     , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 25")
 
     , ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle") -- volume keys
     , ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     , ((0, xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
 
-    --, ((modm, xK_p), spawn "dmenu_run") -- launch dmenu
-    ,((modm, xK_p), spawn "rofi -show run") -- launch rofi
+    , ((modm, xK_Return), spawn $ XMonad.terminal conf) -- launch a terminal
+
+    , ((modm, xK_d), spawn "dmenu_run") -- launch dmenu
+
+    -- , ((modm, xK_p), spawn "rofi -show run") -- launch rofi
 
     , ((modm .|. shiftMask, xK_p), spawn "gmrun") -- launch gmrun
 
-    , ((modm .|. shiftMask, xK_c), kill)  -- close focused window
+    , ((modm, xK_q), kill)  -- close focused window
 
     , ((modm, xK_space ), sendMessage NextLayout) -- Rotate through the available layout algorithms
 
@@ -126,11 +127,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ [
 
     , ((modm, xK_m), windows W.focusMaster  ) -- Move focus to the master window
 
-    , ((modm, xK_Return), windows W.swapMaster) -- Swap the focused window and the master window
+    , ((modm, xK_Up), windows W.swapMaster) -- Swap the focused window and the master window
 
-    , ((modm .|. shiftMask, xK_j), windows W.swapDown  ) -- Swap the focused window with the next window
+    , ((modm, xK_Left), windows W.swapDown  ) -- Swap the focused window with the next window
 
-    , ((modm .|. shiftMask, xK_k), windows W.swapUp    ) -- Swap the focused window with the previous window
+    , ((modm, xK_Right), windows W.swapUp    ) -- Swap the focused window with the previous window
     
     , ((modm, xK_h), sendMessage Shrink) -- Shrink the master area
 
@@ -146,7 +147,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ [
 
     , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess)) -- Quit xmonad
 
-    , ((modm              , xK_q), spawn "xmonad --recompile; xmonad --restart") -- Restart xmonad
+    , ((modm, xK_p), spawn "xmonad --recompile; xmonad --restart") -- Restart xmonad
 
     , ((modm .|. shiftMask, xK_slash), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))-- Run xmessage with a summary of the default keybindings (useful for beginners)
     ]
@@ -216,7 +217,7 @@ myLogHook = return ()
 myStartupHook = do  -- run on startup
 	spawnOnce "nitrogen --restore &"  -- restore last wallpaper 
 	spawnOnce "picom --experimental-backend &"
-
+	spawnOnce "xsetroot -cursor_name left_ptr &"
 ------------------------------------------------------------------------------
 --------- STATUS BAR      
 ------------------------------------------------------------------------------
@@ -271,10 +272,10 @@ help :: String
 help = unlines ["The default modifier key is 'widows'. Default keybindings:",
     "",
     "-- launching and killing programs",
-    "mod-Shift-Enter  Launch terminator",
-    "mod-p            Launch dmenu",
+    "mod-Enter  Launch terminator",
+    "mod-d            Launch dmenu",
     "mod-Shift-p      Launch gmrun",
-    "mod-Shift-c      Close/kill the focused window",
+    "mod-q      Close/kill the focused window",
     "mod-Space        Rotate through the available layout algorithms",
     "mod-Shift-Space  Reset the layouts on the current workSpace to default",
     "mod-n            Resize/refresh viewed windows to the correct size",
@@ -287,9 +288,9 @@ help = unlines ["The default modifier key is 'widows'. Default keybindings:",
     "mod-m          Move focus to the master window",
     "",
     "-- modifying the window order",
-    "mod-Return   Swap the focused window and the master window",
-    "mod-Shift-j  Swap the focused window with the next window",
-    "mod-Shift-k  Swap the focused window with the previous window",
+    "mod-up   Swap the focused window and the master window",
+    "mod-left  Swap the focused window with the next window",
+    "mod-right  Swap the focused window with the previous window",
     "",
     "-- resizing the master/slave ratio",
     "mod-h  Shrink the master area",
@@ -304,7 +305,7 @@ help = unlines ["The default modifier key is 'widows'. Default keybindings:",
     "",
     "-- quit, or restart",
     "mod-Shift-q  Quit xmonad",
-    "mod-q        Restart xmonad",
+    "mod-p        Restart xmonad",
     "mod-[1..9]   Switch to workSpace N",
     "",
     "-- Workspaces & screens",

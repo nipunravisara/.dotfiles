@@ -18,17 +18,23 @@ Config {
        overrideRedirect = True,
        sepChar = "%",
        alignSep = "}{",
-       template = "%StdinReader% }{ <icon=cpu.xpm/> %cpu% | <icon=memory.xpm/> %memory% | <icon=calendar.xpm/> %date% | <icon=clock.xpm/> %time% | <icon=brightness-full.xpm/> %bright% | <icon=wifi.xpm/> %wlp2s0wi% | <icon=ethernet.xpm/> %enx0c5b8f279a64% | %battery%",
+       template = "%StdinReader% }{ <icon=cpu.xpm/> %cpu% | <icon=memory.xpm/> %memory% | <icon=calendar.xpm/> %date% | <icon=clock.xpm/> %time% | <icon=brightness-full.xpm/> %bright% | <icon=ethernet.xpm/> %dynnetwork% | <icon=wifi.xpm/> %wlp2s0wi% | %battery%",
        commands = [ Run StdinReader,
 
-                    Run Cpu [
-                            "-t","<total>%",
+                    Run Cpu ["-t","<total>%",
                             "-L","3","-H","50",
                             "--normal","#b8de6f",
-			    "--high","red"
-			    ] 10,
+			    "--high","red"] 10,
 
-                    Run Memory ["-t","<usedratio>%"] 10,
+        	    Run DynNetwork [ "--template" , "<tx>kB/s|<rx>kB/s"
+                             , "--Low"      , "1000"       -- units: B/s
+                             , "--High"     , "5000"       -- units: B/s
+                             , "--low"      , "darkgreen"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "darkred"
+                             ] 10,
+
+		    Run Memory ["-t","<usedratio>%"] 10,
 
                     Run Date "%a %b %_d" "date" 10,
                     
@@ -40,15 +46,6 @@ Config {
 			
 		    Run Wireless "wlp2s0" ["-t", "<essid> <quality>%"] 10,
 		    
-		    Run Network "enx0c5b8f279a64" [
-                                   "-t","<rx>Kb|<tx>Kb",
-                                   "-L","0",
-                                   "-H","32", 
-                                   "-S ","True",
-                                   "--low","#41aea9",
-                                   "--normal","green",
-                                   "--high","#fa9579"] 10,
-
 		    Run Battery [ "-t", "<acstatus><left>%, <timeleft>  ",
 				   "-L", "20", "-l", "red",
 				   "--",
@@ -57,6 +54,6 @@ Config {
 				   "-o", "<icon=battry.xpm/> ",
 				   "-m", "white",
 				   "-p", "green"  -- This appears to not be working on my X1 Carbon
-				 ] 600
+				 ] 5
                  ],
        }

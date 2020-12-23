@@ -1,3 +1,4 @@
 Xft.dpi: 150
-Xcursor.size: 32
-xterm*faceSize: 30
+
+Xcursor.theme: Neutral
+Xcursor.size: 50
