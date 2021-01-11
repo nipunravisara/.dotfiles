@@ -1,0 +1,55 @@
+* {  
+    font:            "Overpass 18";
+    background-color:      #222;
+    border-color:          White;
+    text-color:           White;
+}
+
+/* Window */
+
+window {
+    anchor: north;
+    location: north;
+    width: 100%;
+    margin: 4px;
+    children: [ horibox ];
+}
+
+/* Window container */
+
+horibox {
+    orientation: horizontal;
+    children:   [ prompt, entry, listview ];
+}
+
+/* Run prompt  */
+
+prompt {
+   padding: 10px 15px;
+   border-radius: 4px 0px 0px 4px;
+   background-color: #0ea17b;
+   text-color:white;
+}
+
+
+/* Input filed */
+
+entry {
+   border-radius: 4px;
+   expand: false;
+   width: 430px;
+   padding: 10px;
+   vertical-align: south;
+}
+
+
+listview {
+    layout:     horizontal;
+    spacing:    20px;
+    lines:      100;
+}
+
+
+element selected {
+    background-color: #464646;
+}
