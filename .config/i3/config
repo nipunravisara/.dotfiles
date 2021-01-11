@@ -37,7 +37,7 @@ set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec "amixer set Master 10%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer set Master 10%- unmute"
 bindsym XF86MonBrightnessUp exec "light -A 10"
-bindsym XF86MonBrightnessDown exec "light -U 10"
+bindsym XF86MonBrightnessDown exec "light -U 5"
 bindsym XF86AudioMute exec "amixer set Master toggle"
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 floating_modifier $mod
