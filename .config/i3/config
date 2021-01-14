@@ -31,14 +31,26 @@ exec picom --experimental-backend
 exec xsetroot -cursor_name left_ptr
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-# Key bindings------------------------
+# Volume key bindings------------------------
 
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec "amixer set Master 10%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer set Master 10%- unmute"
+
+# Backlight key bindings----------------------
+
 bindsym XF86MonBrightnessUp exec "light -A 10"
 bindsym XF86MonBrightnessDown exec "light -U 5"
 bindsym XF86AudioMute exec "amixer set Master toggle"
+
+# Audio control key bindings------------------
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Window key bindings-------------------------
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 floating_modifier $mod
 bindsym $mod+Return exec kitty
