@@ -30,7 +30,7 @@ exec nitrogen --restore
 exec picom --experimental-backend
 exec xsetroot -cursor_name left_ptr
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
+exec dunst -- notification server
 # Volume key bindings------------------------
 
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -55,8 +55,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 bindsym $mod+Return exec kitty
 bindsym $mod+q kill
-bindsym $mod+d exec rofi -show run -display-run " Run"
 bindsym $mod+j focus left
+bindsym $mod+d exec rofi -show run -display-run ""
+#bindsym $mod+d exec dmenu_run -fn 'Overpass Mono-12'
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
