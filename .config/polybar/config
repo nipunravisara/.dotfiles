@@ -17,33 +17,28 @@
 ;==========================================================
 
 [colors]
-background = #222
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+black = #263238
+silver = #717f86
+white = #ffffff
+red = #ff9800
+green = #8bc34a
+yellow = #ffc107
+blue = #03a9f4
+magenta = #e91e63
+cyan = #009688
 
 [bar/example]
 width = 100%
 height = 40
 radius = 4.0
 fixed-center = false
-separator = " | "
-separator-foreground = #636363
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
 border-size = 5
-border-color = #00000
+
+background = ${colors.black}
+foreground = ${colors.white}
 
 padding-left = 0
-padding-right = 1
-
-module-margin-left = 0
-module-margin-right = 0
+padding-right = 0
 
 ;font-0 = JetBrainsMono Nerd Font:size=18:weight=bold;4
 font-0 = Overpass Mono:weight=Bold:size=18;3
@@ -51,12 +46,12 @@ font-1 = Font Awesome 5 Brands Regular:style=Regular:size=15;3
 font-2 = Font Awesome 5 Free Solid:style=Solid:size=14;3
 
 modules-left = my-text-label i3
-modules-center = 
-modules-right = memory cpu temperature network alsa battery backlight date spotify playpause powermenu
+modules-center = date
+modules-right = memory cpu temperature network alsa battery backlight spotify playpause powermenu
 
 tray-position = right
 tray-padding = 2
-tray-background = #000
+tray-background = ${colors.black}
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -73,186 +68,89 @@ cursor-scroll = ns-resize
 [module/my-text-label]
 type = custom/text
 content = ""
-content-background = #16c79a
-content-foreground = #fff
+content-background = ${colors.yellow}
+content-foreground = ${colors.black}
 content-padding = 1
 
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
 pin-workspaces = true
-enable-click = true
-strip-wsnumbers = true
-fuzzy-match = true
+enable-click = false
+enable-scroll = true
+wrapping-scroll = true
 
 ws-icon-0 = "1;"
 ws-icon-1 = "2;"
 ws-icon-2 = "3;"
 ws-icon-3 = "4;"
-ws-icon-4 = "5;"
+ws-icon-4 = "5;"
 ws-icon-default = 
 
 label-mode = %name%
 label-mode-padding = 1
-label-mode-background = #00ffb7
+label-mode-background = ${colors.green}
 label-mode-font = 2
 
 label-focused = %icon%
-label-focused-foreground = #fff
-label-focused-background = #464646
-label-focused-underline = #fff
+label-focused-foreground = ${colors.white}
+label-focused-background = ${colors.black}
 label-focused-padding = 1
 label-focused-font = 2
 
 label-unfocused = %icon%
+label-unfocused-foreground = ${colors.silver}
 label-unfocused-padding = 1
-label-unfocused-foreground = #c2c2c2
 label-unfocused-font = 2
 
-label-visible = %icon%
-label-visible-underline = #555555
-label-visible-foreground = #c2c2c2
-label-visible-padding = 1
-label-visible-font = 2
-
 label-urgent = %icon%
-label-urgent-foreground =  #c2c2c2
-label-urgent-background = #7a8e77
+label-urgent-foreground =  ${colors.magenta}
+label-urgent-background = ${colors.black}
 label-urgent-padding = 1
 label-urgent-font = 2
 
-[module/previous]
-type = custom/script
-format = <label>
-exec = echo ""
-line-size = 1
-click-left = "playerctl --player=spotify previous"
-
-[module/next]
-type = custom/script
-format = <label>
-label-padding-right = 4
-exec = echo ""
-line-size = 1
-click-left = "playerctl --player=spotify next"
-
-[module/playpause]
-type = custom/ipc
-hook-0 = echo ""
-hook-1 = echo ""
-hook-2 = echo ""
-initial = 1
-format-underline = #1db954
-line-size = 1
-click-left = "playerctl --player=spotify play-pause"
-
-[module/spotify]
-type = custom/script
-format = <label>
-format-prefix = " "
-exec = ~/.config/polybar/scripts/spotify
-interval = 0.1
-format-padding = 2
-format-background = #1DB954
-format-prefix-foreground = #ffffff
-click-left = "playerctl --player=spotify play-pause"
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = #fff
-label = %percentage_used%%
-
 [module/cpu]
 type = internal/cpu
-interval = 2
 format-prefix = " "
-format-prefix-foreground = #fff
-format-underline = #f90000
+format-prefix-foreground = ${colors.black}
+format-prefix-background = ${colors.green}
+format-prefix-padding-left = 1
 label = %percentage%%
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature%
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-foreground = #fff
-
-[module/network]
-type = internal/network
-interface = wlp2s0
-interval = 0.3
-
-format-connected = <ramp-signal> <label-connected>
-
-label-connected = %essid% %downspeed:9%
-label-connected-foreground = #eefafafa
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-5 = 
-
-format-disconnected = <label-disconnected>
-
-label-disconnected = 
-label-disconnected-foreground = #66ffffff
+label-background = ${colors.green}
+label-foreground = ${colors.black}
+label-padding-right = 1
+interval = 2
 
 [module/alsa]
 type = internal/alsa
-format-volume = <ramp-volume> <label-volume>
-;format-volume = <ramp-volume> <bar-volume>
-
-label-volume-foreground = #fff
-
 format-muted-prefix = " "
-format-muted-foreground = #ffc107
-label-muted = Muted
+format-volume = <ramp-volume><label-volume>
+format-muted-prefix-foreground = ${colors.black}
+format-muted-prefix-background = ${colors.yellow}
+format-muted-prefix-padding-left = 1
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
-ramp-volume-4 = 
-ramp-volume-5 = 
+label-volume-background = ${colors.yellow}
+label-volume-foreground = ${colors.black}
+label-volume-padding-right = 1
+
+ramp-volume-background = ${colors.yellow}
+ramp-volume-foreground = ${colors.black}
+ramp-volume-padding-left = 1
+
+label-muted = Muted
+label-muted-background = ${colors.yellow}
+label-muted-foreground = ${colors.black}
+label-muted-padding-right = 1
+
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
+ramp-volume-3 = " "
+ramp-volume-4 = " "
+ramp-volume-5 = " "
 
 ramp-headphones-0 = 
 ramp-headphones-1 = 
-
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #f5a70a
-bar-volume-foreground-7 = #ff5555
-
-bar-volume-width = 12
-bar-volume-gradient = false
-bar-volume-indicator = 
-bar-volume-indicator-font = 2
-bar-volume-fill = 
-bar-volume-fill-font = 0
-bar-volume-empty = 
-bar-volume-empty-font = 0
-bar-volume-empty-foreground = #fff
 
 [module/battery]
 type = internal/battery
@@ -260,27 +158,47 @@ battery = BAT0
 adapter = AC
 full-at = 98
 time-format =  %Hh:%Mm
-label-charging = %percentage%% - %time%
-label-discharging = %percentage%% - %time%
-format-charging = <animation-charging> <label-charging>
-format-discharging = <animation-discharging> <label-discharging>
-format-full-prefix = " "
-format-full-prefix-foreground = #fff
 poll-interval = 1
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
-animation-discharging-4 = 
-animation-discharging-framerate = 500
+label-full = %percentage%%
+label-full-background = ${colors.blue}
+label-full-foreground = ${colors.black}
+label-full-padding-right = 1
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-foreground = #fff
+format-charging = <animation-charging><label-charging>
+format-discharging = <ramp-capacity><label-discharging>
+
+label-charging = %percentage%% - %time%
+label-charging-background = ${colors.blue}
+label-charging-padding-right = 1
+label-discharging = %percentage%% - %time%
+label-discharging-background = ${colors.blue}
+label-discharging-padding-right = 1
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.black}
+format-full-prefix-background = ${colors.blue}
+format-full-prefix-padding-left = 1
+
+ramp-capacity-background = ${colors.blue}
+ramp-capacity-padding-left = 1
+
+animation-charging-background = ${colors.blue}
+animation-charging-padding-left = 1
+
+animation-charging-foreground = ${colors.black}
+
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
+
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-4 = " "
 animation-charging-framerate = 500
 
 [module/backlight]
@@ -288,6 +206,10 @@ type = internal/backlight
 card = intel_backlight
 format = <ramp> <label>
 label = %percentage%%
+
+format-foreground = ${colors.black}
+format-background = ${colors.magenta}
+format-padding = 1
 
 ramp-0 = 
 ramp-1 = 
@@ -300,32 +222,31 @@ type = internal/date
 interval = 1.0
 date = %A, %d %B %I:%M %p
 
-[module/title]
-type = internal/xwindow
-# format-background = #f00
-format-foreground = #f0c674
-format-padding = 1
-label-maxlen = 50
-
 [module/powermenu]
 type = custom/menu
 format-spacing = 1
+
 label-open = 
-label-open-foreground = #fff
-label-close =  cancel
-label-close-foreground = #e91e63
+label-open-foreground = ${colors.black}
+label-open-background = ${colors.cyan}
+label-open-padding = 1
+
+label-close =  Cancel
+label-close-foreground = ${colors.magenta}
+label-close-padding-left = 1
+
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 =  reboot
+menu-0-0 =  Reboot
 menu-0-0-exec = menu-open-1
-menu-0-1 =  power off
+menu-0-1 =  Power off
 menu-0-1-exec = menu-open-2
 
-menu-1-0 =  reboot
+menu-1-0 =  Reboot
 menu-1-0-exec = reboot
 
-menu-2-0 =  power off
+menu-2-0 =  Power off
 menu-2-0-exec = poweroff
 
 
