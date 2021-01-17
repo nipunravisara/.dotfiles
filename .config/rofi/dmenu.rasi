@@ -25,10 +25,10 @@ horibox {
 /* Run prompt  */
 
 prompt {
-   padding: 9px 20px;
    border-radius: 4px 0px 0px 4px;
    background-color: #ffc107;
    text-color: black;
+   padding: 5px 18px;
 }
 
 
@@ -38,8 +38,8 @@ entry {
    border-radius: 4px;
    expand: false;
    width: 430px;
-   padding: 10px;
-   vertical-align: south;
+   padding: 8px;
+   vertical-aign: south;
 }
 
 
@@ -51,7 +51,7 @@ listview {
 
 element {
   border: 0px;
-  padding: 10px 25px;
+  padding: 9px 25px 6px 25px;
   margin: 0px;
 }
 

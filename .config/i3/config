@@ -4,10 +4,10 @@ set $mod Mod4
 #for_window [class="^.*"] border pixel 2
 for_window [class="^.*"] border pixel 2
 new_window 1pixel
-gaps inner 5
-gaps outer 0
+gaps inner 8
+gaps outer 2
 smart_borders on
-smart_borders no_gaps
+#smart_borders no_gaps
 
 font pango:Overpass Mono,Font Awesome 5 Free Solid, 14
 
@@ -56,7 +56,7 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty
 bindsym $mod+q kill
 bindsym $mod+j focus left
-bindsym $mod+d exec rofi -show run -display-run ""
+bindsym $mod+d exec rofi -show run -display-run ""
 #bindsym $mod+d exec dmenu_run -fn 'Overpass Mono-12'
 bindsym $mod+k focus down
 bindsym $mod+l focus up
