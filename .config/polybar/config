@@ -68,8 +68,8 @@ cursor-scroll = ns-resize
 [module/my-text-label]
 type = custom/text
 content = ""
-content-background = ${colors.yellow}
-content-foreground = ${colors.black}
+content-background = ${colors.magenta}
+content-foreground = ${colors.white}
 content-padding = 1
 
 [module/i3]
