@@ -67,7 +67,7 @@ cursor-scroll = ns-resize
 
 [module/my-text-label]
 type = custom/text
-content = ""
+content = " venom"
 content-background = ${colors.magenta}
 content-foreground = ${colors.white}
 content-padding = 1
@@ -112,12 +112,12 @@ label-urgent-font = 2
 [module/cpu]
 type = internal/cpu
 format-prefix = " "
-format-prefix-foreground = ${colors.black}
-format-prefix-background = ${colors.green}
+format-prefix-foreground = ${colors.green}
+format-prefix-background = ${colors.black}
 format-prefix-padding-left = 1
 label = %percentage%%
-label-background = ${colors.green}
-label-foreground = ${colors.black}
+label-background = ${colors.black}
+label-foreground = ${colors.green}
 label-padding-right = 1
 interval = 2
 
@@ -125,21 +125,21 @@ interval = 2
 type = internal/alsa
 format-muted-prefix = " "
 format-volume = <ramp-volume><label-volume>
-format-muted-prefix-foreground = ${colors.black}
-format-muted-prefix-background = ${colors.yellow}
+format-muted-prefix-foreground = ${colors.yellow}
+format-muted-prefix-background = ${colors.black}
 format-muted-prefix-padding-left = 1
 
-label-volume-background = ${colors.yellow}
-label-volume-foreground = ${colors.black}
+label-volume-background = ${colors.black}
+label-volume-foreground = ${colors.yellow}
 label-volume-padding-right = 1
 
-ramp-volume-background = ${colors.yellow}
-ramp-volume-foreground = ${colors.black}
+ramp-volume-background = ${colors.black}
+ramp-volume-foreground = ${colors.yellow}
 ramp-volume-padding-left = 1
 
 label-muted = Muted
-label-muted-background = ${colors.yellow}
-label-muted-foreground = ${colors.black}
+label-muted-background = ${colors.black}
+label-muted-foreground = ${colors.yellow}
 label-muted-padding-right = 1
 
 ramp-volume-0 = " "
@@ -161,8 +161,8 @@ time-format =  %Hh:%Mm
 poll-interval = 1
 
 label-full = %percentage%%
-label-full-background = ${colors.blue}
-label-full-foreground = ${colors.black}
+label-full-background = ${colors.black}
+label-full-foreground = ${colors.blue}
 label-full-padding-right = 1
 
 format-charging = <animation-charging><label-charging>
@@ -170,26 +170,26 @@ format-discharging = <ramp-capacity><label-discharging>
 
 label-charging = %percentage%% - %time%
 label-charging-padding-right = 1
-label-charging-foreground = ${colors.black}
-label-charging-background = ${colors.blue}
+label-charging-foreground = ${colors.blue}
+label-charging-background = ${colors.black}
 label-discharging = %percentage%% - %time%
-label-discharging-foreground = ${colors.black}
-label-discharging-background = ${colors.blue}
+label-discharging-foreground = ${colors.blue}
+label-discharging-background = ${colors.black}
 label-discharging-padding-right = 1
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.black}
-format-full-prefix-background = ${colors.blue}
+format-full-prefix-foreground = ${colors.blue}
+format-full-prefix-background = ${colors.black}
 format-full-prefix-padding-left = 1
 
-ramp-capacity-foreground = ${colors.black}
-ramp-capacity-background = ${colors.blue}
+ramp-capacity-foreground = ${colors.blue}
+ramp-capacity-background = ${colors.black}
 ramp-capacity-padding-left = 1
 
-animation-charging-background = ${colors.blue}
+animation-charging-background = ${colors.black}
 animation-charging-padding-left = 1
 
-animation-charging-foreground = ${colors.black}
+animation-charging-foreground = ${colors.blue}
 
 ramp-capacity-0 = " "
 ramp-capacity-1 = " "
@@ -210,8 +210,8 @@ card = intel_backlight
 format = <ramp> <label>
 label = %percentage%%
 
-format-foreground = ${colors.black}
-format-background = ${colors.magenta}
+format-foreground = ${colors.magenta}
+format-background = ${colors.black}
 format-padding = 1
 
 ramp-0 = 
@@ -223,7 +223,7 @@ ramp-4 = 
 [module/date]
 type = internal/date
 interval = 1.0
-date = %A, %d %B %I:%M %p
+date =%A, %d %B %I:%M %p
 
 [module/network]
 type = internal/network
@@ -234,16 +234,16 @@ format-connected = <ramp-signal><label-connected>
 format-disconnected = <label-disconnected>
 
 label-connected = %essid%
-label-connected-foreground = ${colors.black}
-label-connected-background = ${colors.cyan}
+label-connected-foreground = ${colors.cyan}
+label-connected-background = ${colors.black}
 
 label-disconnected = 
-label-disconnected-foreground = ${colors.black}
-label-disconnected-background = ${colors.cyan}
+label-disconnected-foreground = ${colors.cyan}
+label-disconnected-background = ${colors.black}
 label-connected-padding-right = 1
 
-ramp-signal-foreground = ${colors.black}
-ramp-signal-background = ${colors.cyan}
+ramp-signal-foreground = ${colors.cyan}
+ramp-signal-background = ${colors.black}
 ramp-signal-padding-left = 1
 
 ramp-signal-0 = " "
