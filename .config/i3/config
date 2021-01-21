@@ -55,7 +55,7 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty
 bindsym $mod+q kill
 bindsym $mod+j focus left
-bindsym $mod+d exec rofi -show run -display-run ""
+bindsym $mod+d exec rofi -show run -display-run " Run"
 #bindsym $mod+d exec dmenu_run -fn 'Overpass Mono-12'
 bindsym $mod+k focus down
 bindsym $mod+l focus up
