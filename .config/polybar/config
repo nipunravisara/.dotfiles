@@ -76,7 +76,7 @@ content-padding = 1
 type = internal/i3
 format = <label-state> <label-mode>
 pin-workspaces = true
-enable-click = false
+enable-click = true
 enable-scroll = true
 wrapping-scroll = true
 
