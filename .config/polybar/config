@@ -29,7 +29,7 @@ alert = #bd2c40
 width = 100%
 height = 40
 radius = 4.0
-fixed-center = false
+fixed-center = true
 separator = " | "
 separator-foreground = #636363
 
@@ -51,8 +51,8 @@ font-1 = Font Awesome 5 Brands Regular:style=Regular:size=15;3
 font-2 = Font Awesome 5 Free Solid:style=Solid:size=14;3
 
 modules-left = my-text-label i3
-modules-center = 
-modules-right = memory cpu temperature network alsa battery backlight date spotify playpause powermenu
+modules-center =   previous spotify playpause next
+modules-right = memory cpu temperature network alsa battery backlight date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -73,7 +73,7 @@ cursor-scroll = ns-resize
 [module/my-text-label]
 type = custom/text
 content = ""
-content-background = #16c79a
+content-background = #ffc107
 content-foreground = #fff
 content-padding = 1
 
@@ -149,11 +149,10 @@ click-left = "playerctl --player=spotify play-pause"
 [module/spotify]
 type = custom/script
 format = <label>
-format-prefix = " "
+format-prefix = " "
 exec = ~/.config/polybar/scripts/spotify
 interval = 0.1
 format-padding = 2
-format-background = #1DB954
 format-prefix-foreground = #ffffff
 click-left = "playerctl --player=spotify play-pause"
 
@@ -298,7 +297,7 @@ ramp-4 = 
 [module/date]
 type = internal/date
 interval = 1.0
-date = %A, %d %B %I:%M %p
+date = %I:%M %p
 
 [module/title]
 type = internal/xwindow

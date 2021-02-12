@@ -31,17 +31,18 @@ exec picom --experimental-backend
 exec xsetroot -cursor_name left_ptr
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec dunst -- notification server
+
 # Volume key bindings------------------------
 
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec "amixer set Master 10%+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer set Master 10%- unmute"
+bindsym XF86AudioRaiseVolume exec "amixer set Master 1%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer set Master 1%- unmute"
+bindsym XF86AudioMute exec "amixer set Master toggle"
 
 # Backlight key bindings----------------------
 
-bindsym XF86MonBrightnessUp exec "light -A 10"
-bindsym XF86MonBrightnessDown exec "light -U 5"
-bindsym XF86AudioMute exec "amixer set Master toggle"
+bindsym XF86MonBrightnessUp exec "light -A 1"
+bindsym XF86MonBrightnessDown exec "light -U 1"
 
 # Audio control key bindings------------------
 
@@ -51,6 +52,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Window key bindings-------------------------
+
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 floating_modifier $mod
 bindsym $mod+Return exec kitty
@@ -116,10 +118,10 @@ mode "resize" {
         bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Right resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
