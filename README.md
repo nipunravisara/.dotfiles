@@ -24,17 +24,17 @@ Available themes
 
 ## legacy
 
-![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/i3/.screenshots/legacy.png?raw=true "legacy")
+![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/legacy/.screenshots/legacy.png?raw=true "legacy")
 
 ***
 
 ## boxes
 
-![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/i3/.screenshots/legacy.png?raw=true "legacy")
+![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/legacy/.screenshots/legacy.png?raw=true "legacy")
 
 ***
 
 ## venom
 
-![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/i3/.screenshots/legacy.png?raw=true "legacy")
+![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/legacy/.screenshots/legacy.png?raw=true "legacy")
 
