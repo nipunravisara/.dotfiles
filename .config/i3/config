@@ -30,17 +30,18 @@ exec picom --experimental-backend
 exec xsetroot -cursor_name left_ptr
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec dunst -- notification server
+
 # Volume key bindings------------------------
 
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec "amixer set Master 10%+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer set Master 10%- unmute"
+bindsym XF86AudioRaiseVolume exec "amixer set Master 1%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer set Master 1%- unmute"
+bindsym XF86AudioMute exec "amixer set Master toggle"
 
 # Backlight key bindings----------------------
 
-bindsym XF86MonBrightnessUp exec "light -A 10"
-bindsym XF86MonBrightnessDown exec "light -U 5"
-bindsym XF86AudioMute exec "amixer set Master toggle"
+bindsym XF86MonBrightnessUp exec "light -A 1"
+bindsym XF86MonBrightnessDown exec "light -U 1"
 
 # Audio control key bindings------------------
 
@@ -50,13 +51,16 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Window key bindings-------------------------
+
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 floating_modifier $mod
 bindsym $mod+Return exec kitty
 bindsym $mod+q kill
 bindsym $mod+j focus left
 bindsym $mod+d exec rofi -show run -display-run " Run"
+
 #bindsym $mod+d exec dmenu_run -fn 'Overpass Mono-12'
+
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
@@ -93,6 +97,7 @@ set $ws4 4
 set $ws5 5
 
 # Switch workspaces-----------------------------
+
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -100,6 +105,7 @@ bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
 
 # move focused container to workspace------------
+
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -115,10 +121,10 @@ mode "resize" {
         bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Right resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
