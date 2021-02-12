@@ -36,5 +36,5 @@ Available themes
 
 ## venom
 
-![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/legacy/.screenshots/venom-screenshot.png?raw=true "legacy")
+![i3-colored-box-screenshot](https://github.com/nipunravisara/.dotfiles/blob/i3-colored-box-minimal/.screenshots/venom-screenshot.png?raw=true "legacy")
 
