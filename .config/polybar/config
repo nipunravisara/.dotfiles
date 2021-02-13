@@ -49,6 +49,8 @@ modules-left = my-text-label i3
 modules-center = date
 modules-right = cpu alsa battery backlight network powermenu
 
+tray-position = right
+;wm-restack = i3
 ;==========================================================
 ;                      _       _           
 ;  _ __ ___   ___   __| |_   _| | ___  ___ 
@@ -69,9 +71,10 @@ content-padding = 1
 type = internal/i3
 format = <label-state> <label-mode>
 pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
 enable-click = true
-enable-scroll = true
-wrapping-scroll = true
+fuzzy-match = true
 
 ws-icon-0 = "1;"
 ws-icon-1 = "2;"
@@ -226,11 +229,11 @@ interval = 0.3
 format-connected = <ramp-signal><label-connected>
 format-disconnected = <label-disconnected>
 
-label-connected = %essid%
+label-connected = %{A1:nm-connection-editor:}%essid%%{A}
 label-connected-foreground = ${colors.cyan}
 label-connected-background = ${colors.black}
 
-label-disconnected = 
+label-disconnected = 
 label-disconnected-foreground = ${colors.cyan}
 label-disconnected-background = ${colors.black}
 label-connected-padding-right = 1
@@ -239,12 +242,12 @@ ramp-signal-foreground = ${colors.cyan}
 ramp-signal-background = ${colors.black}
 ramp-signal-padding-left = 1
 
-ramp-signal-0 = " "
-ramp-signal-1 = " "
-ramp-signal-2 = " "
-ramp-signal-3 = " "
-ramp-signal-4 = " "
-ramp-signal-5 = " "
+ramp-signal-0 = " "
+ramp-signal-1 = " "
+ramp-signal-2 = " "
+ramp-signal-3 = " "
+ramp-signal-4 = " "
+ramp-signal-5 = " "
 
 [module/powermenu]
 type = custom/menu
@@ -263,9 +266,9 @@ label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
 menu-0-0 =  Reboot
-menu-0-0-exec = menu-open-1
+menu-0-0-exec = reboot
 menu-0-1 =  Power off
-menu-0-1-exec = menu-open-2
+menu-0-1-exec = poweroff`
 
 menu-1-0 =  Reboot
 menu-1-0-exec = reboot
