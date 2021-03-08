@@ -1,14 +1,12 @@
 # Basic configs-----------------------
 
 set $mod Mod4
-#for_window [class="^.*"] border pixel 2
 for_window [class="^.*"] border pixel 2
 new_window 1pixel
-gaps inner 8
-gaps outer 2
+gaps inner 10
+gaps outer -5
+smart_gaps on
 smart_borders on
-#smart_borders no_gaps
-
 font pango:Overpass Mono,Font Awesome 5 Free Solid, 14
 
 # Colors------------------------------
@@ -26,11 +24,12 @@ client.background       #ffffff
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec nitrogen --restore
+exec --no-startup-id pasystray
+exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id xset s 120
 exec picom --experimental-backend
 exec xsetroot -cursor_name left_ptr
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec dunst -- notification server
 
 # Volume key bindings------------------------
 
@@ -58,7 +57,7 @@ floating_modifier $mod
 bindsym $mod+Return exec alacritty
 bindsym $mod+q kill
 bindsym $mod+j focus left
-bindsym $mod+d exec rofi -show run -display-run ""
+bindsym $mod+d exec rofi -show run -display-run "RUN  "
 #bindsym $mod+d exec dmenu_run -fn 'Overpass Mono-12'
 bindsym $mod+k focus down
 bindsym $mod+l focus up
@@ -110,6 +109,8 @@ bindsym $mod+Shift+3 move container to workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
 
+#for_window [class="mpv" instance="gl"] floating enable
+
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 mode "resize" {
@@ -120,8 +121,6 @@ mode "resize" {
 
         # same bindings, but for the arrow keys
         bindsym Righ resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Left resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r

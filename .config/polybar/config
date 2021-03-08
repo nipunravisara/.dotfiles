@@ -27,12 +27,13 @@ blue = #03a9f4
 magenta = #e91e63
 cyan = #009688
 
-[bar/example]
+[bar/topBar]
 width = 100%
 height = 40
 radius = 4.0
 fixed-center = true
 border-size = 5
+dpi = 100
 
 background = ${colors.black}
 foreground = ${colors.white}
@@ -44,12 +45,18 @@ font-0 = Overpass Mono:weight=Bold:size=18;3
 font-1 = Font Awesome 5 Brands Regular:style=Regular:size=15;3
 font-2 = Font Awesome 5 Free Solid:style=Solid:size=14;3
 
-modules-left = my-text-label i3
-modules-center = date
-modules-right = cpu alsa battery backlight network powermenu
+modules-left = my-text-label i3 space-separator title
+modules-center = date dot-separator spotify
+modules-right = volume space-separator cpu space-separator battery space-separator backlight space-separator network space-separator powermenu space-separator
 
 tray-position = right
-;wm-restack = i3
+tray-padding = 0
+tray-background = ${colors.black}
+tray-foreground = ${colors.white}
+tray-scale = 1.0
+tray-maxsize = 28
+wm-restack = i3
+
 ;==========================================================
 ;                      _       _           
 ;  _ __ ___   ___   __| |_   _| | ___  ___ 
@@ -58,6 +65,26 @@ tray-position = right
 ; |_| |_| |_|\___/ \__,_|\__,_|_|\___||___/
 ;
 ;==========================================================
+
+[module/dot-separator]
+type = custom/text
+content = " • "
+
+[module/space-separator]
+type = custom/text
+content = "  "
+
+[module/spotify]
+type = custom/script
+interval = 0.1
+format-prefix = " "
+format = <label>
+exec = python ~/.local/bin/scripts/spotify.py -f '{song}'
+
+format-prefix-background = ${colors.black}
+format-prefix-foreground = "#1DB954"
+label-background = ${colors.black}
+label-foreground = "#1DB954"
 
 [module/my-text-label]
 type = custom/text
@@ -78,9 +105,9 @@ fuzzy-match = true
 ws-icon-0 = "1;"
 ws-icon-1 = "2;"
 ws-icon-2 = "3;"
-ws-icon-3 = "4;"
-ws-icon-4 = "5;"
-ws-icon-default = 
+ws-icon-3 = "4;"
+ws-icon-4 = "5;"
+ws-icon-default = 
 
 label-mode = %mode%
 label-mode-padding = 1
@@ -104,86 +131,90 @@ label-urgent-background = ${colors.black}
 label-urgent-padding = 1
 label-urgent-font = 2
 
+[module/title]
+type = internal/xwindow
+
+format = <label>
+format-background = ${colors.black}
+format-foreground = ${colors.silver}
+format-padding = 2
+
+label = %title%
+label-maxlen = 50
+
+[module/volume]
+type = internal/pulseaudio
+
+format-volume =  <bar-volume>
+format-volume-background = ${colors.black}
+format-volume-foreground = ${colors.yellow}
+format-volume-padding = 1
+format-font = 2
+ 
+format-muted = <label-muted>
+format-muted-background = ${colors.black}
+format-muted-foreground = ${colors.yellow}
+format-muted-padding = 1
+ 
+label-muted = " ---------"
+ 
+bar-volume-width = 10
+bar-volume-gradient = false
+ 
+bar-volume-indicator =
+bar-volume-indicator-foreground = ${colors.yellow}
+bar-volume-indicator-font = 2
+ 
+bar-volume-fill = ━
+bar-volume-foreground-0 = ${colors.yellow}
+bar-volume-fill-font = 2
+ 
+bar-volume-empty = ━
+bar-volume-empty-foreground = ${colors.silver}
+bar-volume-empty-font = 2
+ 
+click-right = tilix -e "pavucontrol"
+
 [module/cpu]
 type = internal/cpu
 format-prefix = " "
 format-prefix-foreground = ${colors.green}
 format-prefix-background = ${colors.black}
-format-prefix-padding-left = 1
 label = %percentage%%
 label-background = ${colors.black}
 label-foreground = ${colors.green}
-label-padding-right = 1
 interval = 2
-
-[module/alsa]
-type = internal/alsa
-format-muted-prefix = " "
-format-volume = <ramp-volume><label-volume>
-format-muted-prefix-foreground = ${colors.yellow}
-format-muted-prefix-background = ${colors.black}
-format-muted-prefix-padding-left = 1
-
-label-volume-background = ${colors.black}
-label-volume-foreground = ${colors.yellow}
-label-volume-padding-right = 1
-
-ramp-volume-background = ${colors.black}
-ramp-volume-foreground = ${colors.yellow}
-ramp-volume-padding-left = 1
-
-label-muted = Muted
-label-muted-background = ${colors.black}
-label-muted-foreground = ${colors.yellow}
-label-muted-padding-right = 1
-
-ramp-volume-0 = " "
-ramp-volume-1 = " "
-ramp-volume-2 = " "
-ramp-volume-3 = " "
-ramp-volume-4 = " "
-ramp-volume-5 = " "
-
-ramp-headphones-0 = 
-ramp-headphones-1 = 
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-time-format =  %Hh:%Mm
 poll-interval = 1
 
 label-full = %percentage%%
 label-full-background = ${colors.black}
 label-full-foreground = ${colors.blue}
-label-full-padding-right = 1
 
 format-charging = <animation-charging><label-charging>
 format-discharging = <ramp-capacity><label-discharging>
 
-label-charging = %percentage%% - %time%
-label-charging-padding-right = 1
+label-charging = %percentage%%
 label-charging-foreground = ${colors.blue}
 label-charging-background = ${colors.black}
-label-discharging = %percentage%% - %time%
+
+label-discharging = %percentage%%
 label-discharging-foreground = ${colors.blue}
 label-discharging-background = ${colors.black}
-label-discharging-padding-right = 1
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.blue}
 format-full-prefix-background = ${colors.black}
-format-full-prefix-padding-left = 1
 
 ramp-capacity-foreground = ${colors.blue}
 ramp-capacity-background = ${colors.black}
-ramp-capacity-padding-left = 1
 
 animation-charging-background = ${colors.black}
-animation-charging-padding-left = 1
-
 animation-charging-foreground = ${colors.blue}
 
 ramp-capacity-0 = " "
@@ -207,7 +238,6 @@ label = %percentage%%
 
 format-foreground = ${colors.magenta}
 format-background = ${colors.black}
-format-padding = 1
 
 ramp-0 = 
 ramp-1 = 
@@ -232,14 +262,12 @@ label-connected = %{A1:nm-connection-editor:}%essid%%{A}
 label-connected-foreground = ${colors.cyan}
 label-connected-background = ${colors.black}
 
-label-disconnected = 
+label-disconnected = "睊Disconnected"
 label-disconnected-foreground = ${colors.cyan}
 label-disconnected-background = ${colors.black}
-label-connected-padding-right = 1
 
 ramp-signal-foreground = ${colors.cyan}
 ramp-signal-background = ${colors.black}
-ramp-signal-padding-left = 1
 
 ramp-signal-0 = " "
 ramp-signal-1 = " "
@@ -250,30 +278,23 @@ ramp-signal-5 = " "
 
 [module/powermenu]
 type = custom/menu
-format-spacing = 1
+expand-right = false
 
-label-open = 
-label-open-foreground = ${colors.white}
-label-open-background = ${colors.black}
-label-open-padding = 1
-
-label-close =  Cancel
+label-open = ""
+label-close = ""
 label-close-foreground = ${colors.magenta}
-label-close-padding-left = 1
+label-separator = " • "
+label-separator-foreground = ${colors.silver}
 
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 =  Reboot
-menu-0-0-exec = reboot
-menu-0-1 =  Power off
-menu-0-1-exec = poweroff`
-
-menu-1-0 =  Reboot
-menu-1-0-exec = reboot
-
-menu-2-0 =  Power off
-menu-2-0-exec = poweroff
-
+menu-0-0 = " "
+menu-0-0-exec = systemctl reboot
+menu-0-1 = " "
+menu-0-1-exec = systemctl poweroff
+menu-0-2 = " "
+menu-0-2-exec = i3-msg exit
+menu-0-3 = " "
+menu-0-3-exec = systemctl hibernate
+menu-0-4 = ""
+menu-0-4-exec = i3lock-fancy
 
 ; vim:ft=dosini
